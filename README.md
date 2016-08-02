@@ -2,7 +2,7 @@
 This video review lesson covers many of the concepts that you've learned about in this topic so far. To get the most out of these videos we recommend that you complete the Readings and Labs that come before it. 
 
 ## Video
-<iframe width="100%" height="720" src="https://www.youtube.com/embed/hts7TjpPw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" height="720" src="https://www.youtube.com/embed/hts7TjpPw-8" frameborder="0" allowfullscreen></iframe>
 
 ## How You Can Help Us Make These Videos Better
 
@@ -35,3 +35,5 @@ Do you think this video would be better if it were somewhere else in the curricu
 
 Any other comments or feedback you have? Raise an issue and let us know. 
 <p class='util--hide'>View <a href='https://learn.co/lessons/orm-video-review-building-a-metaprogrammed-abstract-orm'>ORM Video Review: Building a Metaprogrammed Abstract ORM</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/orm-video-review-building-a-metaprogrammed-abstract-orm'>Video Review: Building a Metaprogrammed Abstract ORM</a> on Learn.co and start learning to code for free.</p>
