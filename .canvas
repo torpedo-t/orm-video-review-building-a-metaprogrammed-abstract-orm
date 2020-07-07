@@ -1,0 +1,6 @@
+---
+:lessons:
+- :id: 10765
+  :course_id: 353
+  :canvas_url: https://learning.flatironschool.com/courses/353/pages/orm-video-review-building-a-metaprogrammed-abstract-orm
+  :type: page
