@@ -84,7 +84,7 @@ class Orm
         INSERT INTO #{self.class.table_name} (#{self.class.attribute_names_for_insert}) VALUES (#{self.class.question_marks_for_insert})
         SQL
 
-        DB[:conn].execute(sql, *attribute_values) # *attribute_values = splat . It allows us to dynamically send the information as individual arguments
+        DB[:conn].execute(sql, *attribute_values) # *attribute_values = splat . It allows us to dynamically send the information as individual arguments. Needs to be a method defined that returns the attribute values.
         self.id = DB[:conn].execute("SELECT last_insert_rowid();").flatten.first
         # this method will insert an instance into the table
         # also assigns the instance an id
@@ -107,6 +107,7 @@ class Orm
         ATTRIBUTES.keys[1..-1].collect{|attribute_name| self.send(attribute_name)}
         # this method should return an array like
         # ["Orm Name", "Orm Location", "Orm Occupation"]
+        # we use this method to call on it like so *attribute_values within the #insert, #update methods
     end
 
     def self.sql_for_update
