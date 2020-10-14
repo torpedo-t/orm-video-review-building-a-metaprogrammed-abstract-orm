@@ -75,7 +75,7 @@ class Orm
 
     def persisted?
         !!self.id
-        # boolean statement that will return true or false
+        # boolean expression, that will return true or false
         # if the record is persisted, it returns true
     end
 
