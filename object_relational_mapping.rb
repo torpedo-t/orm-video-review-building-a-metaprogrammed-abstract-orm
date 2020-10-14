@@ -84,8 +84,10 @@ class Orm
         INSERT INTO #{self.class.table_name} (#{self.class.attribute_names_for_insert}) VALUES (#{self.class.question_marks_for_insert})
         SQL
 
-        DB[:conn].execute(sql, *attribute_values)
+        DB[:conn].execute(sql, *attribute_values) # *attribute_values = splat . It allows us to dynamically send the information as individual arguments
         self.id = DB[:conn].execute("SELECT last_insert_rowid();").flatten.first
+        # this method will insert an instance into the table
+        # also assigns the instance an id
     end
 
     def self.attribute_names_for_insert
@@ -109,6 +111,10 @@ class Orm
 
     def self.sql_for_update
         ATTRIBUTES.keys[1..-1].collect{|attribute_name| "#{attribute_name} = ?"}.join(",")
+        # return to me all of the keys besides id
+        # return to me all of the keys in a variable called attribute_name
+        # build a string called attribute_name = ?
+        # and then join those individual strings with a comma
     end
     
     def update 
@@ -117,5 +123,6 @@ class Orm
         SQL
 
         DB[:conn].execute(sql, *attribute_values, self.id)
+        # this method will update an instance of the class without duplicating it in our table
     end
 end
