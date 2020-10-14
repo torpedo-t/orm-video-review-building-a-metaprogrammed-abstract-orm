@@ -87,14 +87,21 @@ class Orm
 
     def self.attribute_names_for_insert
         ATTRIBUTES.keys[1..-1].join(",")
+        # this method should return every key from the ATTRIBUTES hash except id
+        # joined by a comma
     end
 
     def self.question_marks_for_insert
         (ATTRIBUTES.keys.size-1).times.collect{"?"}.join(",")
+        # this method should count and collect the number of keys within
+        # our ATTRIBUTES hash (except the id), and return to us a string of ?'s separated
+        # by a comma, so we can string interpolate it in our #insert method
     end
 
     def attribute_values
-        ATTRIBUTES.keys[1..-1].collect{|key| self.send(key)}
+        ATTRIBUTES.keys[1..-1].collect{|attribute_name| self.send(attribute_name)}
+        # this method should return an array like
+        # ["Orm Name", "Orm Location", "Orm Occupation"]
     end
 
     def self.sql_for_update
