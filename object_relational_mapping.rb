@@ -6,6 +6,7 @@ class Orm
         :location => "TEXT",
         :occupation => "TEXT"
     } # attributes hash is editable from class to class
+      # this is our point of introspection      
 
     ATTRIBUTES.keys.each do |attribute_name|
         attr_accessor attribute_name
