@@ -34,7 +34,11 @@ class Orm
         SQL
 
         rows = DB[:conn].execute(sql, id)
-        self.reify_from_row(rows.first) if rows.first
+        if rows.first
+          self.reify_from_row(rows.first) 
+        else
+            nil
+        end
         # this method will select a row from the table where the id equals
         # the id of the argument passed into the method
     end
