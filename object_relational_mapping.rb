@@ -81,7 +81,7 @@ class Orm
     def persisted?
         !!self.id
         # boolean expression, that will return true or false
-        # if the record is persisted, it returns true
+        # if the record is exists (theres an object stored in our database with matching id), it returns true
     end
 
     def insert 
@@ -93,12 +93,15 @@ class Orm
         self.id = DB[:conn].execute("SELECT last_insert_rowid();").flatten.first
         # this method will insert an instance into the table
         # also assigns the instance an id
+        # our sql before went like
+        # INSERT INTO posts (title, content) VALUES (?, ?)
     end
 
     def self.attribute_names_for_insert
         ATTRIBUTES.keys[1..-1].join(",")
         # this method should return every key from the ATTRIBUTES hash except id
         # joined by a comma
+        # so that we could call on it in our #insert method
     end
 
     def self.question_marks_for_insert
@@ -106,6 +109,7 @@ class Orm
         # this method should count and collect the number of keys within
         # our ATTRIBUTES hash (except the id), and return to us a string of ?'s separated
         # by a comma, so we can string interpolate it in our #insert method
+        # so if we had 3 keys we would want to return "(?, ?, ?)"
     end
 
     def attribute_values
