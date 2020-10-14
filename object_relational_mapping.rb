@@ -134,6 +134,6 @@ class Orm
         SQL
 
         DB[:conn].execute(sql, *attribute_values, self.id)
-        # this method will update an instance of the class without duplicating it in our table
+        # this method will update an existing instance of the class without duplicating it in our table
     end
 end
