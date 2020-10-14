@@ -1,13 +1,13 @@
 module Persistable
     module ClassMethods
 
-        def self.table_name
+        def table_name
             "#{self.to_s.downcase}s"
             # this method is built, so that we can string interpolate the method 
             # later down the road in our methods to refer to the table name abstractly
         end
 
-        def self.find(id)
+        def find(id)
             sql = <<-SQL
             SELECT * FROM #{self.table_name} WHERE id = ?
             SQL
@@ -22,7 +22,7 @@ module Persistable
             # the id of the argument passed into the method
         end
         
-        def self.reify_from_row(row)
+        def reify_from_row(row)
             self.new.tap do |o|
                 ATTRIBUTES.keys.each.with_index do |attribute_name, i|
                     o.send("#{attribute_name}=", row[i])
@@ -32,7 +32,7 @@ module Persistable
             end
         end
         
-        def self.create_sql
+        def create_sql
             ATTRIBUTES.collect{|attribute_name, schema| "#{attribute_name} #{schema}"}.join(", ")
             # we create this method to return our ATTRIBUTES hash as a string
             # "id INTEGER PRIMARY KEY,
@@ -40,7 +40,7 @@ module Persistable
             # content TEXT"
         end
         
-        def self.create_table
+        def create_table
             sql = <<-SQL
             CREATE TABLE IF NOT EXISTS #{self.table_name} (
             #{self.create_sql}
@@ -51,14 +51,14 @@ module Persistable
             # if a table, with this name, doesn't exist, create one with that name.
         end
 
-        def self.attribute_names_for_insert
+        def attribute_names_for_insert
             ATTRIBUTES.keys[1..-1].join(",")
             # this method should return every key from the ATTRIBUTES hash except id
             # joined by a comma
             # so that we could call on it in our #insert method
         end
         
-        def self.question_marks_for_insert
+        def question_marks_for_insert
             (ATTRIBUTES.keys.size-1).times.collect{"?"}.join(",")
             # this method should count and collect the number of keys within
             # our ATTRIBUTES hash (except the id), and return to us a string of ?'s separated
@@ -66,7 +66,7 @@ module Persistable
             # so if we had 3 keys we would want to return "(?, ?, ?)"
         end
 
-        def self.sql_for_update
+        def sql_for_update
             ATTRIBUTES.keys[1..-1].collect{|attribute_name| "#{attribute_name} = ?"}.join(",")
             # return to me all of the keys besides id
             # return to me all of the keys in a variable called attribute_name
