@@ -34,7 +34,7 @@ class Orm
         SQL
 
         rows = DB[:conn].execute(sql, id)
-        self.reify_from_row(rows.first)
+        self.reify_from_row(rows.first) if rows.first
         # this method will select a row from the table where the id equals
         # the id of the argument passed into the method
     end
@@ -65,6 +65,7 @@ class Orm
         SQL
 
         DB[:conn].execute(sql)
+        # if a table, with this name, doesn't exist, create one with that name.
     end
 
     def save
