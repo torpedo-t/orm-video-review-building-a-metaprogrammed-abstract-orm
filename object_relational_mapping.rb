@@ -43,7 +43,8 @@ class Orm
         self.new.tap do |o|
             ATTRIBUTES.keys.each.with_index do |attribute_name, i|
                 o.send("#{attribute_name}=", row[i])
-            # creates a new instance of the class and also 
+            # creates a new instance of the class and also assigns the object with
+            # attributes from the keys within the ATTRIBUTES hash
             end
         end
     end
@@ -67,13 +68,15 @@ class Orm
     end
 
     def save
-        # if the past has been saved before, then call update
+        # if the object has been saved before, then call update
         persisted? ? update : insert
         # otherwise call insert
     end
 
     def persisted?
         !!self.id
+        # boolean statement that will return true or false
+        # if the record is persisted, it returns true
     end
 
     def insert 
