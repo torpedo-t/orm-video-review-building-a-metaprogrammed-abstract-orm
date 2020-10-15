@@ -1,5 +1,7 @@
 class Orm
-
+    # the class only needs to house the hash of attributes as well as a reader method
+    # that returns our constant referring to our hash of attributes
+    # which in this case is ATTRIBUTES
     ATTRIBUTES = {
         :id => "INTEGER PRIMARY KEY",
         :name => "TEXT",

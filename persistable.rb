@@ -7,7 +7,7 @@ module Persistable
             # later down the road in our methods to refer to the table name abstractly
         end
 
-        #Orm.create(:name => "John") #=> #<Orm: @id=1, @name="John"
+        # Orm.create(:name => "John") #=> #<Orm: @id=1, @name="John"
         def create(attributes_hash)
             self.new.tap do |o|
                 attributes_hash.each do |attribute_name, attribute_value|
