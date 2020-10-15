@@ -10,8 +10,8 @@ module Persistable
         #Orm.create(:name => "John") #=> #<Orm: @id=1, @name="John"
         def create(attributes_hash)
             self.new.tap do |o|
-                self.attributes_hash.keys.each.with_index do |attribute_name, i|
-                    o.send("#{attribute_name}=", row[i])
+                attributes_hash.each do |attribute_name, attribute_value|
+                    o.send("#{attribute_name}=", attribute_value)
                 end
                 o.save
             end
